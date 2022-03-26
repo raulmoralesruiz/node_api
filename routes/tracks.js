@@ -1,12 +1,13 @@
 const express = require("express");
 const { getItems, getItem, createItem, updateItem, deleteItem } = require("../controllers/tracks");
+const { authMiddleware } = require("../middleware/session");
 const { validatorCreateItem, validatorGetItem} = require("../validators/tracks");
 const router = express.Router();
 
 /**
  * Lista todos los items
  */
-router.get("/", getItems);
+router.get("/", authMiddleware, getItems);
 
 /**
  * Obtener detalle de un item
